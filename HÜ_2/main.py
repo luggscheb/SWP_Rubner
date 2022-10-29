@@ -9,7 +9,10 @@ vierling = 4 gleiche zahlen
 straßen flush = straße und flush
 royal flush = A,K,Q,J,10 und stern    
 """
-import random 
+import random
+import re
+from tkinter import PIESLICE
+from unittest import removeResult 
 möglich=[]
 gezogen=[]
 
@@ -34,7 +37,16 @@ class Card:
         if self.farbe == 3:
             ausgabe += "'Kreuz'".center(9, ' ')
         ausgabe += "|" 
-        ausgabe += str(self.nummer).center(3, ' ')
+        if self.nummer == 14:
+               ausgabe += "'A'".center(5, ' ') 
+        elif self.nummer == 11:
+               ausgabe += "'J'".center(5, ' ') 
+        elif self.nummer == 12:
+               ausgabe += "'Q'".center(5, ' ') 
+        elif self.nummer == 13:
+           ausgabe += "'K'".center(5, ' ') 
+        else:
+           ausgabe += str(self.nummer).center(5, ' ')
         ausgabe += "]\n" 
         print(ausgabe)
             
@@ -43,21 +55,104 @@ class Card:
 def init():
     del gezogen[::]
     for i in range(4):
-        for j in range(1,14):
+        for j in range(2,15):
             möglich.append(Card(i,j))
         
-def Ziehen(anzahl):
+def ziehen(anzahl):
     for i in range(anzahl+1):
             r = random.randint(0,len(möglich)-1)
             # print(r,len(möglich))
             gezogen.append(möglich[r])
             del möglich[r]
         
+def royalFlush(array):
+    for i in array:
+        if i.farbe != 1:
+            return False
+        if i.nummer == 14 or i.nummer == 13 or i.nummer == 12 or i.nummer == 11 or i.nummer == 10:
+            pass
+        else:
+            return False
+    return True
+            
+
+def straßeFlush(array):
+    farbe = array[0].farbe
+    for i in array:
+        if i.farbe != farbe:
+            return False
+        
+    start = -1
+    for i in array:
+        if i.nummer > start:
+            start = i.nummer 
+    b = 0
+    for i in array:
+        vorhanden = False
+        for j in array:
+            if j.nummer == (start - b):
+                vorhanden = True
+        if not vorhanden:
+            return False     
+        b+=1
+    return True    
+
+def vierling(array):
+    pass
+
+def fullHouse(array):
+    pass
+
+def flush(array):
+    pass
+
+def straße(array):
+    pass
+
+def drilling(array):
+    pass
+
+def doppelpaar(array):
+    pass
+
+def auswerten(array):
+    print("Sie haben gezogen:")
+    if(royalFlush(array)):
+        return "Royal Flush"
+    if(straßeFlush(array)):
+        return "Straße Flush"
+    if(vierling(array)):
+        return "vierling"
+    if(fullHouse(array)):
+        return "fullhouse"
+    if(flush(array)):
+        return "flush"
+    if(straße(array)):
+        return "straße"
+    if(drilling(array)):
+        return "drilling"
+    if(doppelpaar(array)):
+        return "doppelpaar"
+    else:
+        return "Nichts"
+
+def erzeugeRoyalFlush():
+    a = [Card(1,14),Card(1,13),Card(1,12),Card(1,11),Card(1,10)]
+    return a
+
+def erzeugestraßeFlush():
+    a = [Card(2,8),Card(2,6),Card(2,7),Card(2,4),Card(2,5)]
+    return a
 
 if __name__ == "__main__":
     init()
-    Ziehen(5)
+    ziehen(5)
     for e in gezogen:
         e.ausgeben()
         
+    
+    # print(auswerten(erzeugeRoyalFlush()))
+    print(auswerten(erzeugestraßeFlush()))
         
+# nur höchstwertige zählenq
+# prozentueller anteil bei 1000 ziehungen
