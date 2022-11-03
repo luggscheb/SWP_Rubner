@@ -98,9 +98,34 @@ def straßeFlush(array):
     return True    
 
 def vierling(array):
-    pass
+    for i in array:
+        durchlaufZähler = 0
+        nummer1 = i.nummer
+        for j in array:
+            if j.nummer == i.nummer: 
+                durchlaufZähler+=1
+        if durchlaufZähler == 4:
+            return True
+    return False
 
 def fullHouse(array):
+    for i in array:
+        durchlaufZähler = 0
+        for j in array:
+            if j.nummer == i.nummer: 
+                durchlaufZähler+=1
+                
+        if durchlaufZähler == 3:
+            for i in array:
+                durchlaufZähler2 = 0
+                for j in array:
+                    if j.nummer == i.nummer: 
+                        durchlaufZähler2+=1
+            if durchlaufZähler == 2:
+                return True
+    return False        
+    
+    
     pass
 
 def flush(array):
@@ -144,6 +169,14 @@ def erzeugestraßeFlush():
     a = [Card(2,8),Card(2,6),Card(2,7),Card(2,4),Card(2,5)]
     return a
 
+def erzeugestraßeVierling():
+    a = [Card(0,2),Card(1,2),Card(2,2),Card(3,2),Card(2,5)]
+    return a
+
+def erzeugestraßeFullHouse():
+    a = [Card(0,2),Card(1,2),Card(2,2),Card(0,3),Card(2,3)]
+    return a
+
 if __name__ == "__main__":
     init()
     ziehen(5)
@@ -152,7 +185,9 @@ if __name__ == "__main__":
         
     
     # print(auswerten(erzeugeRoyalFlush()))
-    print(auswerten(erzeugestraßeFlush()))
+    # print(auswerten(erzeugestraßeFlush()))
+    # print(auswerten(erzeugestraßeVierling()))
+    print(auswerten(erzeugestraßeFullHouse()))
         
 # nur höchstwertige zählenq
 # prozentueller anteil bei 1000 ziehungen
