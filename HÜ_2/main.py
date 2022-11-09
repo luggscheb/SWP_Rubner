@@ -71,10 +71,9 @@ def royalFlush(array):
         if i.farbe != 1:
             return False
         if i.nummer == 14 or i.nummer == 13 or i.nummer == 12 or i.nummer == 11 or i.nummer == 10:
-            pass
+            return True
         else:
             return False
-    return True
             
 
 def straßeFlush(array):
@@ -132,10 +131,12 @@ def fullHouse(array):
 
 def flush(array):
     start = array[0].farbe
+    zähler = 0
     for i in array:
-        if i.farbe != start: 
-            return False
-    return True
+        if i.farbe == start: 
+            zähler+=1
+    if zähler >= 5:
+        return True
 
 def straße(array):
     start = -1
@@ -143,7 +144,7 @@ def straße(array):
         if i.nummer > start:
             start = i.nummer 
     b = 0
-    for i in array:
+    for i in range(0,5):
         vorhanden = False
         for j in array:
             if j.nummer == (start - b):
@@ -166,10 +167,14 @@ def drilling(array):
     return False
 
 def doppelpaar(array):
+    nummerbereits = 0
+    fabrebereits = 0
     for i in array:
         durchlaufZähler = 0
         for j in array:
             if j.nummer == i.nummer: 
+                nummerbereits = j.nummer
+                fabrebereits = j.farbe
                 durchlaufZähler+=1
                 
         if durchlaufZähler == 2:
@@ -177,7 +182,8 @@ def doppelpaar(array):
                 durchlaufZähler2 = 0
                 for b in array:
                     if b.nummer == a.nummer: 
-                        durchlaufZähler2+=1
+                        if b.nummer != nummerbereits and b.farbe != fabrebereits:
+                            durchlaufZähler2+=1 
             if durchlaufZähler2 == 2:
                 return True
     return False
@@ -311,7 +317,7 @@ def ausgabeStatistik(array):
     pass
 
 if __name__ == "__main__":
-    Logik(1000000,5)
+    Logik(1000000,7)
    
     # for e in gezogen:
     #     e.ausgeben()
