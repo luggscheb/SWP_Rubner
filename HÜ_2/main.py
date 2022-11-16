@@ -12,6 +12,7 @@ royal flush = A,K,Q,J,10 und stern
 import random
 import os
 import platform
+from tabulate import tabulate
 
 möglich=[]
 gezogen=[]
@@ -304,7 +305,8 @@ def Logik(wiederholung,ziehungsZahl):
                 os.system('clear')    
             print(i)   
             
-    ausgabeStatistik(Statistik(wiederholung=wiederholung,isReturn=True))
+    # ausgabeStatistik(Statistik(wiederholung=wiederholung,isReturn=True))
+    ausgabeStatistikSchön(Statistik(wiederholung=wiederholung,isReturn=True))
     
 def ausgabeStatistik(array):
     print("------------------------------------------------------------------------------------------------------------------------------")
@@ -315,6 +317,15 @@ def ausgabeStatistik(array):
     print("%.2f\t\t%.2f\t\t%.2f\t\t%.2f\t\t%.2f\t\t%.2f\t\t%.2f\t\t%.2f\t\t%.2f\t\t%.2f" %(array[0][1],array[1][1],array[2][1],array[3][1],array[4][1],array[5][1],array[6][1],array[7][1],array[8][1],array[9][1]))
     print("------------------------------------------------------------------------------------------------------------------------------")
     pass
+
+def ausgabeStatistikSchön(array):
+    zwischenSpeicher1 = [array[0][0],array[1][0],array[2][0],array[3][0],array[4][0],array[5][0],array[6][0],array[7][0],array[8][0],array[9][0]]
+    zwischenSpeicher2 = [array[0][1],array[1][1],array[2][1],array[3][1],array[4][1],array[5][1],array[6][1],array[7][1],array[8][1],array[9][1]]
+    zwischenSpeicher = [zwischenSpeicher1,zwischenSpeicher2]
+    # for i in array:
+    #     zwischenSpeicher.append(format(i[1],'f'))
+    # print(zwischenSpeicher)
+    print(tabulate(zwischenSpeicher,headers=["Royale Flush","Straße Flush","Vierling","Full House","Flush","Straße","Drilling","Doppel Paar","Paar","High Card"],tablefmt="github",numalign="right"))
 
 if __name__ == "__main__":
     Logik(1000000,7)
