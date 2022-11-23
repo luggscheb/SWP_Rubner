@@ -145,7 +145,7 @@ def straße(array):
         if i.nummer > start:
             start = i.nummer 
     b = 0
-    for i in range(0,5):
+    for i in range(0,len(array)):
         vorhanden = False
         for j in array:
             if j.nummer == (start - b):
@@ -328,7 +328,7 @@ def ausgabeStatistikSchön(array):
     print(tabulate(zwischenSpeicher,headers=["Royale Flush","Straße Flush","Vierling","Full House","Flush","Straße","Drilling","Doppel Paar","Paar","High Card"],tablefmt="github",numalign="right"))
 
 if __name__ == "__main__":
-    Logik(1000000,7)
+    Logik(1000000,5)
    
     # for e in gezogen:
     #     e.ausgeben()
