@@ -125,9 +125,9 @@ def main():
     FirmaABC = Firma("ABC-Teile",[abtChef,abtGast,abtLager,abtPost,abtProduktion])
     
     print("ANZ ABT: " + str(FirmaABC.anzahlAbteilungen()))
-    print("ANZ MIT: " + str(FirmaABC.zaehleMitarbeiter()))
+    print("ANZ MIT: " + str(FirmaABC.zaehleMitarbeiter()) + " Mit / Grup")
     print("Stär ABT: " + FirmaABC.staerksteAbteilung())
-    print("Proz M/F: " + str(FirmaABC.prozentteilFrauMann()))
+    print("Proz M/F: " + str(FirmaABC.prozentteilFrauMann()) + " F / M")
     
     
 
