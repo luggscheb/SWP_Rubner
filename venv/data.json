@@ -1,0 +1,1 @@
+{ "Spieler":2, "Computer":3, "gewonnen":"C"},{ "Spieler":1, "Computer":3, "gewonnen":"C"},{ "Spieler":2, "Computer":1, "gewonnen":"S"},{ "Spieler":1, "Computer":4, "gewonnen":"S"},{ "Spieler":4, "Computer":0, "gewonnen":"C"},{ "Spieler":0, "Computer":4, "gewonnen":"S"},{ "Spieler":1, "Computer":4, "gewonnen":"S"},{ "Spieler":2, "Computer":4, "gewonnen":"C"},
