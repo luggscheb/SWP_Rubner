@@ -40,7 +40,12 @@ def spiel(decision,saveToDB,isHardMode):
         #get meisten gezogen
         response = requests.get('http://127.0.0.1:5000/dbmode')
         rj = response.json()
+        
         #ziehen was dagegen gewinnt
+        for i in range(5):
+            if (rj['index']-i) % 5 == 3 or (rj['index']-i) % 5 == 4:
+                compNummer = i
+                break
     hatGewonnen = ""
 
     Unterschied=(decision-compNummer) % 5
