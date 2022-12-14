@@ -36,7 +36,7 @@ def spiel(decision,saveToDB,isHardMode):
     compNummer=0
     if(isHardMode == 0):
         compNummer=random.randrange(0, 5)
-    else:
+    elif(isHardMode == 1):
         #get meisten gezogen
         response = requests.get('http://127.0.0.1:5000/dbmode')
         rj = response.json()
@@ -44,6 +44,11 @@ def spiel(decision,saveToDB,isHardMode):
         #ziehen was dagegen gewinnt
         for i in range(5):
             if (rj['index']-i) % 5 == 3 or (rj['index']-i) % 5 == 4:
+                compNummer = i
+                break
+    elif(isHardMode ==2):
+        for i in range(5):
+            if (decision-i) % 5 == 3 or (decision-i) % 5 == 4:
                 compNummer = i
                 break
     hatGewonnen = ""
@@ -103,7 +108,7 @@ def main(number):
     saveToDB = False
     
     if(menu_entry_index == 0):
-        options = ["Leicht", "Schwer"]
+        options = ["Leicht", "Schwer","Unmöglich"]
         terminal_menu = TerminalMenu(options)
         menu_entry_index = terminal_menu.show()
         print("Wie oft spielen?")
