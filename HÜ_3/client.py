@@ -95,7 +95,7 @@ def main(number):
     terminal_menu = TerminalMenu(options)
     menu_entry_index = terminal_menu.show()
     print(f"{options[menu_entry_index]}!")
-    saveToDB = True
+    saveToDB = False
     
     if(menu_entry_index == 0):
         options = ["Leicht", "Schwer"]

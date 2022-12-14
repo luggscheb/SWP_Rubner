@@ -6,8 +6,8 @@ false -> Frau
 """
 
 class Firma:
-    Name = ""
-    Abteilungen = []
+    # Name = ""
+    # Abteilungen = []
     
     def __init__(self, name,abteilungen):
         self.Name = name
@@ -53,9 +53,15 @@ class Firma:
                
         
         
+        
+        
+        
+        
+        
+        
 class Person:
-    Name = ""
-    Geschlecht = True
+    # Name = ""
+    # Geschlecht = True
     
     def __init__(self,name,geschlecht):
         self.Name = name
@@ -67,6 +73,12 @@ class Person:
         
         return ("Frau " + self.Name)
 
+
+
+
+
+
+
 class Mitarbeiter(Person):
     
     
@@ -77,6 +89,9 @@ class Mitarbeiter(Person):
         return super().__str__() + " Abteilung:" + self.Abteilung
     
 
+
+
+
 class Gruppenleiter(Mitarbeiter):
     
     def __init__(self, mitarbeiter):
@@ -85,9 +100,14 @@ class Gruppenleiter(Mitarbeiter):
     def __str__(self):
         return super().__str__() + " Gruppenleiter"
     
+    
+    
+    
+    
+    
 class Abteilung:
-    Name = ""
-    Mitarbeiter = []
+    # Name = ""
+    # Mitarbeiter = []
     
     def __init__(self,name,mitarbeiter):
         self.Name = name
@@ -100,6 +120,9 @@ class Abteilung:
 
 def main():
     Mannfred = Person("Mannfred",True)
+    
+    
+    
     Mueller = Person("Mueller",True)
     Thorsten = Person("Thorsten",True)
     Horst = Person("Horst",True)
