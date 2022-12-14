@@ -51,6 +51,11 @@ def spiel(decision,saveToDB,isHardMode):
             if (decision-i) % 5 == 3 or (decision-i) % 5 == 4:
                 compNummer = i
                 break
+    elif(isHardMode ==3):
+        for i in range(5):
+            if (decision-i) % 5 == 1 or (decision-i) % 5 == 2:
+                compNummer = i
+                break
     hatGewonnen = ""
 
     Unterschied=(decision-compNummer) % 5
@@ -70,10 +75,10 @@ def spiel(decision,saveToDB,isHardMode):
         Gewinner = "Computer gewinnt!"
         hatGewonnen = "C"
  
-    CompName=numbertoname(compNummer)
+    
  
     print ("Spieler wählt: ", numbertoname(decision))
-    print ("Computer wählt: ", CompName)
+    print ("Computer wählt: ", numbertoname(compNummer))
     print (Gewinner, "\n")
     
     # toSave = '{ "Spieler":' + str(decision) + ', "Computer":' + str(compNummer) + ', "gewonnen":"' + hatGewonnen  + '"},'
@@ -108,7 +113,7 @@ def main(number):
     saveToDB = False
     
     if(menu_entry_index == 0):
-        options = ["Leicht", "Schwer","Unmöglich"]
+        options = ["Zufall", "Statisik", "Easy", "Unmöglich"]
         terminal_menu = TerminalMenu(options)
         menu_entry_index = terminal_menu.show()
         print("Wie oft spielen?")
