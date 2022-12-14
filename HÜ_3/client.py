@@ -31,11 +31,16 @@ def nametonumber(name):
     elif name=="Schere": return 4
     
  
-def spiel(decision,saveToDB):
+def spiel(decision,saveToDB,isHardMode):
      
-    
- 
-    compNummer=random.randrange(0, 5)
+    compNummer=0
+    if(isHardMode == 0):
+        compNummer=random.randrange(0, 5)
+    else:
+        #get meisten gezogen
+        response = requests.get('http://127.0.0.1:5000/dbmode')
+        rj = response.json()
+        #ziehen was dagegen gewinnt
     hatGewonnen = ""
 
     Unterschied=(decision-compNummer) % 5
@@ -79,11 +84,7 @@ def spiel(decision,saveToDB):
 """
  
 
-print ("0 - Stein")
-print ("1 - Spock")
-print ("2 - Papier")
-print ("3 - Lizard")
-print ("4 - Schere\n")
+
   
 def main(number):
     
@@ -97,8 +98,11 @@ def main(number):
     saveToDB = True
     
     if(menu_entry_index == 0):
+        options = ["Leicht", "Schwer"]
+        terminal_menu = TerminalMenu(options)
+        menu_entry_index = terminal_menu.show()
         print("Wie oft spielen?")
-        play(int(input()),saveToDB)
+        play(int(input()),saveToDB,menu_entry_index)
     elif(menu_entry_index == 1):
         statistik()
     elif(menu_entry_index == 2):
@@ -120,11 +124,11 @@ def statistik():
 def upData(Spieler:int,Computer:int,Gewonnen:str):
     j = {'player': Spieler, 'computer': Computer, 'won': Gewonnen}
     response = requests.put('http://127.0.0.1:5000/db' , json=j)
-    print(response)
-    res_json = response.json()
-    print(res_json)
     
-def play(number,saveToDB) :
+    res_json = response.json()
+    
+    
+def play(number,saveToDB, isHardMode) :
     options = ["Stein", "Spock", "Papier","Lizard","Schere"]
     
     for item in range(number):  
@@ -135,7 +139,7 @@ def play(number,saveToDB) :
         decision = menu_entry_index
 
         name = numbertoname(decision)
-        spiel(decision,saveToDB) 
+        spiel(decision,saveToDB,isHardMode) 
 
 if __name__ == '__main__':
     main(5)

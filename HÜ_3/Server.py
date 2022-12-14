@@ -70,7 +70,19 @@ class Database(Resource):
         db_session.flush()
         return jsonify(info)
     
+class DatabaseMode(Resource):
+    def get(self):
+        draw0 = Data.query.filter(Data.player == 0).count()
+        draw1 = Data.query.filter(Data.player == 1).count()
+        draw2 = Data.query.filter(Data.player == 2).count()
+        draw3 = Data.query.filter(Data.player == 3).count()
+        draw4 = Data.query.filter(Data.player == 4).count()
+        decide = [draw0,draw1,draw2,draw3,draw4]
+        value = max(decide)
+        
+        return jsonify({'index': decide.index(value)})
 api.add_resource(Database, '/db')
+api.add_resource(DatabaseMode, '/dbmode')
 
 
 @app.teardown_appcontext
