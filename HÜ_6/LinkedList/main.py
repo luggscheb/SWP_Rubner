@@ -122,21 +122,35 @@ class VerknüpfteListe:
     def ZufälligBefüllen(self,anzahl:int, min:int, max:int):
         for i in range(anzahl+1):
            self.EndeEinfügen(random.randint(min,max))
+    
+    def Umdrehen(self):
+        vorher = None
+        aktuell = self.kopf
+        while(aktuell is not None):
+            nächstes = aktuell.folgend
+            aktuell.folgend = vorher
+            vorher = aktuell
+            aktuell = nächstes
+        self.kopf = vorher
         
+   
         
 def main():
     Liste = VerknüpfteListe()
     # Liste.EndeEinfügenArgs(5,55677,3,244,635,746,8)
     Liste.ZufälligBefüllen(20,0,200)
     
-    Liste.AnfangEinfügen(88)
-    print(Liste.AusgebenVisuell())
-    print(Liste.ElementeZählen())
-    print(Liste.AddireAlleElemente())
-    Liste.EntferneAnPosition(3)
+    # Liste.AnfangEinfügen(88)
+    # print(Liste.AusgebenVisuell())
+    # print(Liste.ElementeZählen())
+    # print(Liste.AddireAlleElemente())
+    # Liste.EntferneAnPosition(3)
     print(Liste.AusgebenVisuell())
     
-    Liste.ListeLöschen()
+    Liste.Umdrehen()
+    Liste.AusgebenVisuell()
+    
+    Liste.sort()
     Liste.AusgebenVisuell()
     
     
