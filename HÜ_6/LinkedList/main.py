@@ -1,3 +1,7 @@
+# sort
+# reverse
+# deep copy
+
 import random
 
 import schemdraw
