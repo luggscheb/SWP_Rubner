@@ -24,6 +24,14 @@ class VerknüpfteListe:
             aktuell = aktuell.folgend
         return ausgabeString
     
+    def AusgebenTupl(self) -> list:
+        aktuell = self.kopf
+        ausgabeString = []
+        while aktuell is not None:
+            ausgabeString.append(aktuell.wert)
+            aktuell = aktuell.folgend
+        return tuple(ausgabeString)
+    
     def AusgebenVisuell(self):
         with schemdraw.Drawing() as d:
             aktuell = self.kopf
@@ -72,6 +80,17 @@ class VerknüpfteListe:
         while aktuellesElement is not None:
             anzahl += 1
             aktuellesElement = aktuellesElement.folgend
+        return anzahl
+
+    def ElementFinden(self,zufinden) -> int:
+        anzahl = 0
+        aktuellesElement = self.kopf
+        try:
+            while aktuellesElement.wert is not zufinden:
+                anzahl += 1
+                aktuellesElement = aktuellesElement.folgend
+        except:
+                return None
         return anzahl
     
     def AddireAlleElemente(self) -> int:
@@ -137,6 +156,37 @@ class VerknüpfteListe:
             aktuell = nächstes
         self.kopf = vorher
         
+    def Kopieren(self,zukopieren):
+        neueListe = VerknüpfteListe()
+        neueListe.EndeEinfügenArgs(*zukopieren.AusgebenTupl())
+        return neueListe
+    
+    def insertionSortieren(self,kopfvonUnsort):
+        
+        sortiert = None
+        aktuell = kopfvonUnsort
+        while (aktuell != None):
+            nächstes = aktuell.folgend
+            sortiert = self.sortiertEinfügen(sortiert,aktuell)
+            aktuell = nächstes
+        
+        kopfvonUnsort = sortiert
+        return kopfvonUnsort
+    
+    def sortiertEinfügen(self,kopfvonUnsort, nächstes):
+        aktuell = None
+        if (kopfvonUnsort == None or kopfvonUnsort.wert >= nächstes.wert):   
+            nächstes.folgend = kopfvonUnsort
+            kopfvonUnsort = nächstes
+        else:
+            aktuell = kopfvonUnsort
+            
+            while (aktuell.folgend != None and aktuell.folgend.wert < nächstes.wert):       
+                aktuell = aktuell.folgend
+            nächstes.folgend = aktuell.folgend
+            aktuell.folgend = nächstes
+        return kopfvonUnsort
+        
    
         
 def main():
@@ -149,12 +199,17 @@ def main():
     # print(Liste.ElementeZählen())
     # print(Liste.AddireAlleElemente())
     # Liste.EntferneAnPosition(3)
-    print(Liste.AusgebenVisuell())
+    # Liste.AusgebenVisuell()
     
-    Liste.Umdrehen()
+    print(Liste.ElementFinden(3))
+    
+    # Liste.Umdrehen()
     Liste.AusgebenVisuell()
     
-    Liste.sort()
+    # Liste2 = Liste.Kopieren(Liste)
+    # Liste2.AusgebenVisuell()
+    
+    Liste.insertionSortieren(Liste.kopf)
     Liste.AusgebenVisuell()
     
     
