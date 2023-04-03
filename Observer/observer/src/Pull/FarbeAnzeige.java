@@ -1,6 +1,6 @@
-import java.util.PrimitiveIterator;
+package Pull;
 
-public class FarbeAnzeige implements Observer{
+public class FarbeAnzeige implements Anzeige{
 
     private String name;
     private MessPunkt messPunkt;

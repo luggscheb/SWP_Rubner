@@ -1,4 +1,5 @@
-public class BildschirmAnzeige implements Observer {
+package Push;
+public class BildschirmAnzeige implements Anzeige {
 
     private String name;
     private MessPunkt messPunkt;
@@ -8,13 +9,12 @@ public class BildschirmAnzeige implements Observer {
     }
 
     @Override
-    public void aktualisieren() {
-        int[] werte = (int[]) messPunkt.bekommeAktualisierung(this);
-        if(werte == null){
+    public void aktualisieren(int[] Messwerte) {
+        if(Messwerte == null){
             System.out.println("Keine neue Werte!");
 
         }else{
-            System.out.println("Luft: "+ werte[0] +" Temp: "+ werte[1]);
+            System.out.println("Luft: "+ Messwerte[0] +" Temp: "+ Messwerte[1]);
         }
     }
 

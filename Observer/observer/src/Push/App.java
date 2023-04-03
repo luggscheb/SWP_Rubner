@@ -1,10 +1,12 @@
+package Push;
 public class App {
     public static void main(String[] args) throws Exception {
+        System.out.println("Push");
         MessPunkt mp = new MessPunktInnsbruck();
 
-        Observer o1 = new BildschirmAnzeige("B1");
-        Observer o2 = new BildschirmAnzeige("B2");
-        Observer o3 = new FarbeAnzeige("F1");
+        Anzeige o1 = new BildschirmAnzeige("B1");
+        Anzeige o2 = new BildschirmAnzeige("B2");
+        Anzeige o3 = new FarbeAnzeige("F1");
 
         mp.hinzufügen(o1);
         mp.hinzufügen(o2);
@@ -14,7 +16,6 @@ public class App {
         o2.setzeMessPunkt(mp);
         o3.setzeMessPunkt(mp);
 
-        o1.aktualisieren();
 
         mp.LuftfeuchtigkeitMessen(15);
         mp.TemperaturMessen(20);

@@ -1,3 +1,4 @@
+package Pull;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +7,7 @@ import javax.swing.event.ChangeEvent;
 
 public class MessPunktInnsbruck implements MessPunkt{
 
-    private List<Observer> observers;
+    private List<Anzeige> observers;
     private int Temperatur;
     private int Luftfeuchtigkeit;
     private boolean verändert;
@@ -19,7 +20,7 @@ public class MessPunktInnsbruck implements MessPunkt{
 
 
     @Override
-    public void hinzufügen(Observer ob) {
+    public void hinzufügen(Anzeige ob) {
        if(ob == null) throw new NullPointerException("Kein Observer");
        synchronized (MUTEX){
         if(!observers.contains(ob)) observers.add(ob);
@@ -27,7 +28,7 @@ public class MessPunktInnsbruck implements MessPunkt{
     }
 
     @Override
-    public void löschen(Observer ob) {
+    public void löschen(Anzeige ob) {
        synchronized(MUTEX){
         observers.remove(ob);
        }
@@ -52,21 +53,21 @@ public class MessPunktInnsbruck implements MessPunkt{
 
     @Override
     public void ObserverSchicken() {
-        List <Observer> observersLokal = null;
+        List <Anzeige> observersLokal = null;
         synchronized (MUTEX){
             if(!verändert)
             return;
             observersLokal = new ArrayList<>(this.observers);
             this.verändert = false;
         }
-        for (Observer obj : observersLokal){
+        for (Anzeige obj : observersLokal){
             obj.aktualisieren();
         }
     }
 
 
     @Override
-    public Object bekommeAktualisierung(Observer ob) {
+    public Object bekommeAktualisierung(Anzeige ob) {
         int[] rückgabe = {this.Luftfeuchtigkeit, this.Temperatur}; 
         return rückgabe;
     }

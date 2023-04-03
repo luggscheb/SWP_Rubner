@@ -1,4 +1,5 @@
-public interface Observer {
+package Pull;
+public interface Anzeige {
     public void aktualisieren();
     public void setzeMessPunkt(MessPunkt mp);
 }
